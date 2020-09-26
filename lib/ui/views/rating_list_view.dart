@@ -24,7 +24,7 @@ class RatingListViewState extends State<RatingListView> {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: DropdownButton<String>(
-                  value: RatingListViewModel.ALL,
+                  value: model.location,
                   elevation: 16,
                   onChanged: (value) => model.location = value,
                   items: [RatingListViewModel.ALL, ...LOCATIONS]
