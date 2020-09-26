@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RequestService {
-
   static const URL = 'https://rmj.holysheet.workers.dev';
 
-  Future<void> writeReview(Review review) async =>
-      http.post('$URL/review', body: jsonEncode({
+  Future<void> writeReview(Review review) async => http.post('$URL/review',
+      body: jsonEncode({
         'name': review.name,
         'barcode': review.barcode,
         'location': review.location,
@@ -15,16 +14,11 @@ class RequestService {
         'review': review.review,
       }));
 
-  Future<List<Review>> listReviews({String location = ''}) =>
-      http.get('$URL/list?location=$location').then((response) {
+  Future<List<Review>> listReviews({String location}) =>
+      http.get('$URL/list?location=${location ?? ''}').then((response) {
+        print(response.body);
         var json = jsonDecode(response.body);
-        var reviews = <Review>[];
-        for (var rev in json) {
-          print('Json rev ${jsonEncode(rev)}');
-          reviews.add(Review.fromJson(rev));
-        }
-
-        return reviews;
+        return json.keys.map((key) => Review.fromJson(json[key])).toList();
       });
 }
 
@@ -37,7 +31,10 @@ class Review {
 
   Review(this.name, this.barcode, this.location, this.stars, this.review);
 
-  static Review fromJson(Map<String, dynamic> json) =>
-      Review(json['name'], json['barcode'], json['location'], json['stars'],
-          json['review']);
+  static Review fromJson(Map<String, dynamic> json) => Review(
+      json['name'],
+      json['barcode'],
+      json['location'],
+      double.tryParse(json['stars'].toString()),
+      json['review']);
 }

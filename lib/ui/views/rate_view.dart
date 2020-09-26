@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rate_my_jerky/scoped_model/rate_model.dart';
 import 'package:rate_my_jerky/ui/views/base_view.dart';
+import 'package:rate_my_jerky/utility.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class RateView extends StatefulWidget {
@@ -62,8 +63,8 @@ class RateViewState extends State<RateView> {
                     color: Colors.deepPurpleAccent,
                   ),
                   onChanged: (value) => model.location = value,
-                  items: <String>['The Commons', 'Crossroads Market', 'Crossroads Cafe', 'Vending Machine', 'Corner Store', 'Sol\'s Underground']
-                      .map<DropdownMenuItem<String>>((String value) => DropdownMenuItem<String>(
+                  items: LOCATIONS
+                      .map<DropdownMenuItem<String>>((value) => DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
                     )).toList(),
@@ -84,10 +85,6 @@ class RateViewState extends State<RateView> {
                 starCount: 5,
                 allowHalfRating: true,
                 spacing: 2.0,
-                onRated: (value) {
-                  print("rating value -> $value");
-                  // print("rating value dd -> ${value.truncate()}");
-                },
               ),
             ),
             SizedBox(height: 15),

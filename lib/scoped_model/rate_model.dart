@@ -7,7 +7,6 @@ import 'package:rate_my_jerky/utility.dart';
 
 class RateModel extends BaseModel {
 
-  static const defaultLocation = 'Vending Machine';
   final requestService = locator<RequestService>();
 
   int barcode;
@@ -15,7 +14,7 @@ class RateModel extends BaseModel {
   double rating = 0;
   String review;
 
-  String _location = defaultLocation;
+  String _location = DEFAULT_LOCATION;
 
   String get location => _location;
 
@@ -40,7 +39,7 @@ class RateModel extends BaseModel {
         barcode = null;
         rating = 0;
         review = null;
-        _location = defaultLocation;
+        _location = DEFAULT_LOCATION;
       });
 
 }
