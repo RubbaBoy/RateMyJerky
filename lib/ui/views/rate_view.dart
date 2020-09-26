@@ -36,7 +36,41 @@ class RateViewState extends State<RateView> {
                 onTap: () => model.scanBarcode(),
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 15),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  maxLines: 1,
+                  onChanged: (value) => model.name = value,
+                  decoration: InputDecoration.collapsed(
+                      hintText:
+                          'Your Name'),
+                ),
+              ),
+            ),
+            SizedBox(height: 15),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: DropdownButton<String>(
+                  value: model.location,
+                  elevation: 16,
+                  style: TextStyle(color: Colors.deepPurple),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  onChanged: (value) => model.location = value,
+                  items: <String>['The Commons', 'Crossroads Market', 'Crossroads Cafe', 'Vending Machine', 'Corner Store', 'Sol\'s Underground']
+                      .map<DropdownMenuItem<String>>((String value) => DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    )).toList(),
+                ),
+              ),
+            ),
+            SizedBox(height: 15),
             Center(
               child: SmoothStarRating(
                 rating: model.rating,
@@ -56,19 +90,20 @@ class RateViewState extends State<RateView> {
                 },
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 15),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
                   maxLines: 6,
+                  onChanged: (value) => model.review = value,
                   decoration: InputDecoration.collapsed(
                       hintText:
                           'Give a little description of your jerky experience'),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             MaterialButton(
               color: Theme.of(context).buttonColor,
               child: Padding(
