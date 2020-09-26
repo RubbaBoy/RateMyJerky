@@ -26,10 +26,6 @@ class RatingListViewState extends State<RatingListView> {
                 child: DropdownButton<String>(
                   value: RatingListViewModel.ALL,
                   elevation: 16,
-                  // underline: Container(
-                  //   height: 2,
-                  //   color: Colors.deepPurpleAccent,
-                  // ),
                   onChanged: (value) => model.location = value,
                   items: [RatingListViewModel.ALL, ...LOCATIONS]
                       .map<DropdownMenuItem<String>>(
@@ -81,7 +77,14 @@ class RatingListViewState extends State<RatingListView> {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          Text(review.review),
+                                          Flexible(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(review.review)
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),

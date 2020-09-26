@@ -40,7 +40,7 @@ class RateViewState extends State<RateView> {
             SizedBox(height: 15),
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: TextField(
                   maxLines: 1,
                   onChanged: (value) => model.name = value,
@@ -53,15 +53,10 @@ class RateViewState extends State<RateView> {
             SizedBox(height: 15),
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: DropdownButton<String>(
                   value: model.location,
                   elevation: 16,
-                  style: TextStyle(color: Colors.deepPurple),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.deepPurpleAccent,
-                  ),
                   onChanged: (value) => model.location = value,
                   items: LOCATIONS
                       .map<DropdownMenuItem<String>>((value) => DropdownMenuItem<String>(
@@ -85,12 +80,13 @@ class RateViewState extends State<RateView> {
                 starCount: 5,
                 allowHalfRating: true,
                 spacing: 2.0,
+                onRated: (rating) => model.rating = rating,
               ),
             ),
             SizedBox(height: 15),
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: TextField(
                   maxLines: 6,
                   onChanged: (value) => model.review = value,

@@ -35,11 +35,13 @@ class RateModel extends BaseModel {
 
   void submitReview() => requestService.writeReview(Review(name, barcode, _location, rating, review))
       .then((_) {
+    print('why is this here');
         Fluttertoast.showToast(msg: 'Thanks for the review, $name');
         barcode = null;
         rating = 0;
-        review = null;
+        review = '';
         _location = DEFAULT_LOCATION;
+        notifyListeners();
       });
 
 }

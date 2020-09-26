@@ -1,7 +1,7 @@
+import 'package:rate_my_jerky/enums/view_states.dart';
 import 'package:rate_my_jerky/scoped_model/base_model.dart';
 import 'package:rate_my_jerky/service_locator.dart';
 import 'package:rate_my_jerky/services/request_service.dart';
-import 'package:rate_my_jerky/utility.dart';
 
 class RatingListViewModel extends BaseModel {
   static const ALL = 'All Locations';
@@ -19,11 +19,14 @@ class RatingListViewModel extends BaseModel {
     refreshList();
   }
 
-  void refreshList() => requestService
+  void refreshList() {
+    setState(ViewState.Busy);
+    requestService
           .listReviews(location: _location == ALL ? null : _location)
           .then((reviews) {
-            // TODO: REMOVE DUPLICATES!
-        this.reviews = [...reviews, ...reviews, ...reviews];
+        setState(ViewState.Retrieved);
+        this.reviews = reviews;
         notifyListeners();
       });
+  }
 }

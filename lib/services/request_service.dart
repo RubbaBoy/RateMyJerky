@@ -17,7 +17,9 @@ class RequestService {
   Future<List<Review>> listReviews({String location}) =>
       http.get('$URL/list?location=${location ?? ''}').then((response) {
         var json = jsonDecode(response.body);
-        return json.keys.map<Review>((key) => Review.fromJson(json[key])).toList();
+        return json.keys
+            .map<Review>((key) => Review.fromJson(json[key]))
+            .toList();
       });
 }
 
