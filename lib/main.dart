@@ -8,14 +8,19 @@ Future<void> main() async {
   setupLocator();
 
   SharedPreferences.setMockInitialValues({});
-  runApp(MyApp());
+  final prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(brightness: (prefs.getBool("isDark") ?? false) ? Brightness.dark: Brightness.light));
 }
 
 class MyApp extends StatelessWidget {
 
+  final Brightness brightness;
+
+  const MyApp({Key key, this.brightness}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => DynamicTheme(
-      defaultBrightness: Brightness.light,
+      defaultBrightness: brightness,
         data: (brightness) => ThemeData(brightness: brightness),
         themedWidgetBuilder: (context, theme) => MaterialApp(
         title: 'Rate My Jerky',
