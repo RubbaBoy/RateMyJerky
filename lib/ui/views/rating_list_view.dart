@@ -26,11 +26,10 @@ class RatingListViewState extends State<RatingListView> {
                 child: DropdownButton<String>(
                   value: RatingListViewModel.ALL,
                   elevation: 16,
-                  style: TextStyle(color: Colors.deepPurple),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.deepPurpleAccent,
-                  ),
+                  // underline: Container(
+                  //   height: 2,
+                  //   color: Colors.deepPurpleAccent,
+                  // ),
                   onChanged: (value) => model.location = value,
                   items: [RatingListViewModel.ALL, ...LOCATIONS]
                       .map<DropdownMenuItem<String>>(

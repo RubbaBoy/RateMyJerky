@@ -1,51 +1,30 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:rate_my_jerky/service_locator.dart';
 import 'package:rate_my_jerky/ui/views/home_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+Future<void> main() async {
   setupLocator();
 
+  SharedPreferences.setMockInitialValues({});
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Notedown',
-      debugShowCheckedModeBanner: false,
-      // https://github.com/flutter/flutter/issues/35826#issuecomment-559239389
-      // theme: ThemeData.dark().copyWith(
-      //   buttonTheme: const ButtonThemeData(minWidth: 12),
-      //   splashColor: Colors.transparent,
-      // ),
-      home: HomeView(),
-      // home: FutureBuilder(
-      //   future: () {},
-      //   // future: _memoizer.runOnce(() async => authService.trySilent().then((user) async {
-      //   //   if (user == null) return null;
-      //   //   await navigationService.getCachedCategories();
-      //   //   return user;
-      //   // })),
-      //   builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
-      //     switch (snapshot.connectionState) {
-      //       case ConnectionState.none:
-      //       case ConnectionState.waiting:
-      //         return Container(
-      //             color: ThemeData.dark().scaffoldBackgroundColor,
-      //             child: Center(child: CircularProgressIndicator()));
-      //       default:
-      //         if (snapshot.data == null) {
-      //           return LoginView();
-      //         } else {
-      //           return NoteListView(NoteCategory.all);
-      //         }
-      //     }
-      //   },
-      // ),
+  Widget build(BuildContext context) => DynamicTheme(
+      defaultBrightness: Brightness.light,
+        data: (brightness) => ThemeData(brightness: brightness),
+        themedWidgetBuilder: (context, theme) => MaterialApp(
+        title: 'Rate My Jerky',
+        debugShowCheckedModeBanner: false,
+        // https://github.com/flutter/flutter/issues/35826#issuecomment-559239389
+        theme: theme,
+        home: HomeView(),
+      ),
     );
-  }
 }
 
 class MyHomePage extends StatefulWidget {

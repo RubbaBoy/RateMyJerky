@@ -4,7 +4,14 @@ import 'package:rate_my_jerky/scoped_model/base_model.dart';
 import 'package:rate_my_jerky/scoped_model/home_model.dart';
 import 'package:rate_my_jerky/ui/views/base_view.dart';
 
-class HomeView extends StatelessWidget {
+
+class HomeView extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() => HomeViewState();
+}
+
+class HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) => BaseView<HomeModel>(
         builder: (context, child, model) => Container(

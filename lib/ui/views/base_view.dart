@@ -41,28 +41,9 @@ class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
             floatingActionButton: (!widget.showFab
                 ? null
                 : FloatingActionButton(
-                    child: Icon(Icons.add),
-                    onPressed: () {
-                      if (widget.fabAdd != null) {
-                        widget.fabAdd(_model);
-                      }
-                    },
+                    child: Icon(Icons.invert_colors),
+                    onPressed: () => model.toggleTheme(context),
                   )),
-            drawer: Drawer(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  UserAccountsDrawerHeader(
-                    accountName: Text('Bruh'),
-                    accountEmail: Text('huh'),
-                  ),
-                  drawerSeparator(),
-                  drawerItem(context, Icons.delete, 'Trash'),
-                  drawerSeparator(),
-                  drawerItem(context, Icons.settings, 'Settings'),
-                ],
-              ),
-            ),
             body: Builder(
                 builder: (context) => SafeArea(
                       child: widget._builder(context, child, model),

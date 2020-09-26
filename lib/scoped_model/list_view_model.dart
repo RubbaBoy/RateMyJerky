@@ -22,7 +22,7 @@ class RatingListViewModel extends BaseModel {
   void refreshList() => requestService
           .listReviews(location: _location == ALL ? null : _location)
           .then((reviews) {
-    print('reviews = $reviews');
+            // TODO: REMOVE DUPLICATES!
         this.reviews = [...reviews, ...reviews, ...reviews];
         notifyListeners();
       });

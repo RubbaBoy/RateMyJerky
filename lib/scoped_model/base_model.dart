@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:rate_my_jerky/enums/view_states.dart';
 import 'package:rate_my_jerky/service_locator.dart';
 import 'package:rate_my_jerky/services/navigation_service.dart';
+import 'package:rate_my_jerky/services/theme_service.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 ///
@@ -8,7 +10,8 @@ import 'package:scoped_model/scoped_model.dart';
 ///
 class BaseModel extends Model {
 
-  NavigationService navigationService = locator<NavigationService>();
+  final navigationService = locator<NavigationService>();
+  final themeService = locator<ThemeService>();
 
   ViewState _state;
   ViewState get state => _state;
@@ -18,5 +21,6 @@ class BaseModel extends Model {
     notifyListeners();
   }
 
-  String getStuff() => 'TODO';
+  void toggleTheme(BuildContext context) =>
+      themeService.toggleTheme(context);
 }
